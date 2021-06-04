@@ -1,12 +1,25 @@
 <template>
-  <div class="hello">
-      <h1>Register</h1>
-      <input type="email" v-model="email" placeholder="Enter Email" name="email" id="email" required>
-      <br>
-      <input type="password" v-model="password" placeholder="Enter Password" name="psw" id="psw" required>
-      <br>
-      <button @click="register" type="submit" class="registerbtn">Register</button>
-  </div>
+ <!-- eslint-disable-next-line -->
+ <!-- eslint-disable  -->
+<v-layout column>
+  <v-flex xs6 offset-xs3>
+    <div class="white elevation-2">
+      <v-toolbar flat dense class="cyan" dark>
+        <v-toolbar-title>Register</v-toolbar-title>
+      </v-toolbar>
+      <div class="pa-6 pr-4 pt-2 pb-2">
+        <input type="email" v-model="email" placeholder="Enter Email" name="email" id="email" required>
+        <br>
+        <input type="password" v-model="password" placeholder="Enter Password" name="psw" id="psw" required>
+        <br>
+        <div class="error" v-html="error"></div>
+        <br>
+        <v-btn class="cyan" @click="register" type="submit">Register</v-btn>
+      </div>
+    </div>
+  </v-flex>
+</v-layout>
+  
 </template>
 
 <script>
@@ -17,7 +30,8 @@ export default {
   data () {
     return{
         email: '',
-        password: ''
+        password: '',
+        error: null
     }
   },
 //   watch: {
@@ -27,11 +41,15 @@ export default {
 //   },
   methods:{
     async register () {
+      try{
         const response = await AuthenticationService.register({
             email: this.email,
             password: this.password
         })
-        console.log(response.data);
+      } catch (error){
+        this.error = error.response.data.error
+      }
+        
     }
   },
   mounted() {
@@ -44,4 +62,7 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+.error{
+  color: red;
+}
 </style>
