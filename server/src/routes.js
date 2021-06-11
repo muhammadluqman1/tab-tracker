@@ -8,7 +8,9 @@ module.exports = (app) => {
 //      message: 'Hello World!'
 //     });
 // })
-app.post('/register',
-    AuthenticationControllerPolicy.register,
-    AuthenticationController.register)
+    app.post('/register',
+        AuthenticationControllerPolicy.register,
+        AuthenticationController.register)
+    app.post('/login',
+        AuthenticationController.login)
 }
