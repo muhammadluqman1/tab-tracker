@@ -2,8 +2,9 @@
 <!-- eslint-disable  -->
 <template>
   <v-layout column>
-    <v-flex xs6 offset-xs3>
+     <v-flex xs6 offset-xs3 style="max-width:50%;">
       <panel title="Register">
+       
         <form 
           name="tab-tracker-form"
           autocomplete="off">
@@ -28,6 +29,7 @@
           @click="register">
           Register
         </v-btn>
+        
       </panel>
     </v-flex>
   </v-layout>
@@ -35,6 +37,7 @@
 
 <script>
 import AuthenticationService from '@/services/AuthenticationService'
+import Panel from '@/components/Panel'
 export default {
   data () {
     return {
@@ -59,6 +62,9 @@ export default {
         this.error = error.response.data.error
       }
     }
+  },
+  components: {
+    Panel
   }
 }
 </script>

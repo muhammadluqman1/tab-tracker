@@ -2,8 +2,9 @@
 <!-- eslint-disable  -->
 <template>
   <v-layout column>
-    <v-flex xs6 offset-xs3>
-      
+    <v-flex xs6 offset-xs3 style="max-width:50%;">
+      <panel title="Login">
+          <form name="tab-tracker-form">
         <v-text-field
           label="Email"
           v-model="email"
@@ -14,6 +15,7 @@
           type="password"
           v-model="password"
         ></v-text-field>
+          </form>
         <br>
         <div class="danger-alert" v-html="error" />
         <br>
@@ -23,7 +25,7 @@
           @click="login">
           Login
         </v-btn>
-      
+      </panel>
     </v-flex>
   </v-layout>
 </template>
@@ -32,6 +34,7 @@
 //  eslint-disable-next-line
 /* eslint-disable */
 import AuthenticationService from '@/services/AuthenticationService'
+import Panel from '@/components/Panel'
 export default {
   data () {
     return {
@@ -56,6 +59,9 @@ export default {
         this.error = error.response.data.error
       }
     }
+  },
+  components: {
+    Panel
   }
 }
 </script>
