@@ -6,8 +6,6 @@
 <script>
 // eslint-disable-next-line
 /* eslint-disable */
-import SongService from '@/services/SongService'
-import Panel from '@/components/Panel'
 export default {
 }
 </script>

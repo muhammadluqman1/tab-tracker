@@ -3,9 +3,14 @@
 <template>
   <v-toolbar fixed class="cyan" dark style="flex:0;">
     <v-toolbar-title>
-      <span @click="navigateTo({ name: 'root'})" style="cursor:pointer">
+      <router-link
+       tag="span"
+       :to="{
+         name: 'songs'
+         }"
+       style="cursor:pointer">
         TabTracker
-      </span>
+      </router-link>
     </v-toolbar-title>
       <v-toolbar-items>
         <v-btn 
@@ -54,8 +59,8 @@ export default {
     logout () {
       this.$store.dispatch('setToken', null)
       this.$store.dispatch('setUser', null)
-      this.$$router.push({
-        name: 'root'
+      this.$router.push({
+        name: 'songs'
       })
     }
   } 

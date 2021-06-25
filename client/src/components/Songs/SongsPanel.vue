@@ -1,8 +1,6 @@
 <!-- eslint-disable-next-line -->
 <!-- eslint-disable  -->
 <template>
-<v-layout column>
-<v-flex xs6 offset-xs3 style="max-width:50%;">
     <panel title="Songs">
         <v-btn slot="action" @click="navigateTo({name: 'songs-create'})" fab light small absolute right middle class="cyan accent-2">
             <v-icon>
@@ -23,7 +21,7 @@
                     </div>  
                     <v-btn
                         dark
-                        class="cyan"
+                        class="cyan mt-4"
                         :to="{
                         name: 'song', 
                         params: {
@@ -40,18 +38,12 @@
         </v-layout>
         </div>
     </panel>
-</v-flex>
-</v-layout>
 </template>
 <script>
 // eslint-disable-next-line
 /* eslint-disable */
 import SongService from '@/services/SongService'
-import Panel from '@/components/Panel'
 export default {
-components: {
-    Panel
-},
 data() {
     return{
         songs: null
@@ -62,9 +54,17 @@ methods:{
      this.$router.push(route)
  }
 },
-async mounted(){
- this.songs = (await SongService.index()).data
-}
+watch: {
+    '$route.query.search': {
+      immediate: true,
+      async handler (value) {
+        this.songs = (await SongService.index(value)).data
+      }
+    }
+  }
+// async mounted(){
+//  this.songs = (await SongService.index()).data
+// }
 }
 </script>
 <style scoped>
